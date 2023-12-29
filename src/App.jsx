@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Square from "./Square";
-import { X_PLAYER, O_PLAYER, WIN_COMBINATIONS } from "./constants";
+import { X_PLAYER, O_PLAYER } from "./constants";
+import { calculateWinner } from "./helpers";
 
 function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
@@ -79,16 +80,4 @@ export default function Game() {
       </div>
     </div>
   );
-}
-
-function calculateWinner(squares) {
-  for (let i = 0; i < WIN_COMBINATIONS.length; i++) {
-    const [a, b, c] = WIN_COMBINATIONS[i];
-
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-
-  return null;
 }
