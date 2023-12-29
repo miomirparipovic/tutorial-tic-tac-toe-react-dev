@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Square from "./Square";
+import { X_PLAYER, O_PLAYER, WIN_COMBINATIONS } from "./constants";
 
 function Board({ xIsNext, squares, onPlay }) {
   function handleClick(i) {
@@ -7,11 +8,8 @@ function Board({ xIsNext, squares, onPlay }) {
       return;
     }
     const nextSquares = squares.slice();
-    if (xIsNext) {
-      nextSquares[i] = "X";
-    } else {
-      nextSquares[i] = "O";
-    }
+    nextSquares[i] = xIsNext ? X_PLAYER : O_PLAYER;
+
     onPlay(nextSquares);
   }
 
@@ -20,7 +18,7 @@ function Board({ xIsNext, squares, onPlay }) {
   if (winner) {
     status = "Winner: " + winner;
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Next player: " + (xIsNext ? X_PLAYER : O_PLAYER);
   }
 
   return (
@@ -62,12 +60,7 @@ export default function Game() {
   }
 
   const moves = history.map((squares, move) => {
-    let description;
-    if (move > 0) {
-      description = "Go to move #" + move;
-    } else {
-      description = "Go to games start";
-    }
+    const description = move > 0 ? "Go to move #" + move : "Go to games start";
 
     return (
       <li key={move}>
@@ -89,19 +82,8 @@ export default function Game() {
 }
 
 function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
+  for (let i = 0; i < WIN_COMBINATIONS.length; i++) {
+    const [a, b, c] = WIN_COMBINATIONS[i];
 
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
       return squares[a];
