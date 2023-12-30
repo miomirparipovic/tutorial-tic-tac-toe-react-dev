@@ -17,6 +17,8 @@ export default function Board({ xIsNext, squares, onPlay }) {
   let status;
   if (winner) {
     status = "Winner: " + winner;
+  } else if (!squares.some((el) => !el)) {
+    status = "Draw!";
   } else {
     status = "Next player: " + (xIsNext ? X_PLAYER : O_PLAYER);
   }
