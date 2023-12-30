@@ -5,7 +5,7 @@ export function calculateWinner(squares) {
     const [a, b, c] = WIN_COMBINATIONS[i];
 
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return [squares[a], [a, b, c]];
     }
   }
 
