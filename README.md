@@ -1,3 +1,3 @@
-# Tic-tac-toe React
+# Tic-tac-toe, React docs(Tutorial)
 
-This is a React version of the game from the React docs.
+This version of Tic-tac-toe was based on the example from the [React docs](https://react.dev/learn/tutorial-tic-tac-toe) web site, and is implemented in React.
